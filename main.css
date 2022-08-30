@@ -1,0 +1,25 @@
+div#a{
+    width: 100%;
+    text-align: center;
+}
+input#adiciona-carro,
+input#retira-carro{
+    margin: 30px;
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+}
+input#adiciona-carro{            
+    background-color: rgba(255, 0, 0, 0.5);
+}
+input#retira-carro{
+    background-color: rgba(0, 0, 255, 0.5);
+}
+input#mostra-valor{
+    margin: 30px;
+    font-size: 20px;
+}
+div#vagas,
+div#tot{
+    padding: 50px;
+}
