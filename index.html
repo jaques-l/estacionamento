@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estacionamento</title>
+    <style>
+        div#a{
+            width: 100%;
+            text-align: center;
+        }
+        input#adiciona-carro,
+        input#retira-carro{
+            margin: 30px;
+            width: 300px;
+            height: 50px;
+            font-size: 20px;
+        }
+        input#adiciona-carro{            
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+        input#retira-carro{
+            background-color: rgba(0, 0, 255, 0.5);
+        }
+        input#mostra-valor{
+            margin: 30px;
+            font-size: 20px;
+        }
+        div#vagas,
+        div#tot{
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>    
+    <div id="a">
+        <div id="vagas" onload="mostradorVagas()"></div>
+        <div>
+            Defina o número de vagas que seu estacionamento terá:
+            <input type="number" id="numVagas" name="numVagas" value="numVagas" min="0">
+            <input type="button" id="mudar-numero-vagas" value="Trocar o número de vagas" onclick="numeroVagas()">
+        </div>
+        <div>
+            Defina o valor que cada carro pagará:
+            <input type="number" id="valorVaga" value="valorVaga" min="0">
+            <input type="button" id="mudar-valor-vagas" value="Trocar o Valor da vaga" onclick="valorVagas()">
+        </div>
+        <div>
+            <input type="button" id="adiciona-carro" value="Estacionar um carro" onclick="adicionaCarro()">
+        </div>
+        <div class="col large-6">
+            <input type="button" id="retira-carro" value="Retirar um carro" onclick="retiraCarro()">
+        </div>
+        <div id="tot"></div>
+    </div>
+
+    <script>       
+
+        var valorVaga = 10
+        var totalArrecadado = 0
+        var totalVagas = 10
+        var estacionados = 0
+        var mostradorVagas = document.getElementById('vagas')
+        mostradorVagas.innerHTML = `Temos ${totalVagas} vagas no total e ${estacionados} carros estacionados`
+        var mostradorValorTotal = document.getElementById('tot')
+        mostradorValorTotal.innerHTML = `O valor total arrecadado é de: ${totalArrecadado}`
+        
+
+        function numeroVagas(){
+            var numVagas = document.getElementById('numVagas')
+            if(Number(numVagas.value) < estacionados){
+                alert('Ainda há carros estacionados, não foi possível diminuir o número de vagas')
+            } else if(Number(numVagas.value) >= estacionados){
+                alert('Número de vagas alterado com sucesso')
+                totalVagas = Number(numVagas.value)
+                var mostradorVagas = document.getElementById('vagas')
+                mostradorVagas.innerHTML = `Temos um total de ${totalVagas} vagas no total e um ${ estacionados} vagas livre(s)`
+            }
+        }
+
+        function mostradorVagas(){
+            mostradorVagas.innerHTML = `Temos ${totalVagas} vagas no total e ${estacionados} carros estacionados`
+        }
+
+        function adicionaCarro(){
+            var adiciona = document.getElementById('adiciona-carro')
+            if(estacionados > totalVagas - 1){
+                alert('Não há mais vagas')
+                mostradorVagas.innerHTML = `Temos ${totalVagas} vagas no total e ${estacionados} carros estacionados`
+            } else if(estacionados == totalVagas - 1){
+                alert('Essa era nossa última vaga')
+                estacionados ++
+                totalArrecadado += valorVaga
+                mostradorValorTotal.innerHTML = `O valor total arrecadado é de: R$ ${totalArrecadado}`
+                mostradorVagas.innerHTML = `Temos ${totalVagas} vagas no total e ${estacionados} carros estacionados`
+            } else{
+                estacionados ++
+                totalArrecadado += valorVaga
+                mostradorValorTotal.innerHTML = `O valor total arrecadado é de: R$ ${totalArrecadado}`
+                mostradorVagas.innerHTML = `Temos ${totalVagas} vagas no total e ${estacionados} carros estacionados`
+                
+            }
+        }
+        function retiraCarro(){
+            var retira = document.getElementById('retira-carro')
+            if(estacionados > 0){
+                estacionados --
+                mostradorVagas.innerHTML = `Temos ${totalVagas} vagas no total e ${estacionados} carros estacionados`
+            }
+            else{
+                alert('Não há carros estacionados')
+            }
+        }
+        function mostraValor(){
+                   
+        }
+
+        
+    </script>
+    <section>
+</body>
+</html>
